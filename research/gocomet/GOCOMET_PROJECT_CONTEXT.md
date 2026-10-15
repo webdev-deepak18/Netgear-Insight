@@ -218,7 +218,7 @@ Email to Talent Acquisition (CC AVP Marketing) on 4 Oct with the Figma link + Dr
 - Deepak demoed the Claude + Gemini + Figma MCP workflow live and built the mobile hero live.
 - Rated the project 10/10; the AI lead said "I didn't like this assignment" (likely a stress test; Deepak stayed calm and walked through the system). Better answer next time: "9, and here's what I'd improve."
 - **Weak moment:** couldn't name GoComet's customers precisely. Lesson: **research the company's customers and buyer roles before any interview.**
-- Status: thank-you email sent 7 Oct, waiting on HR.
+- Status: thank-you email sent 7 Oct. **Rejected, 13 Oct 2026.** Deepak replied graciously (thanks for the opportunity, learned his weak spots, wished them well). Work is still his to show as an assignment.
 
 ---
 

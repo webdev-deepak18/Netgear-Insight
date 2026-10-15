@@ -41,7 +41,8 @@ Kept as reference notes. Newest status at top, full email thread below.
 | Fri 9 Oct, 14:54 | Deepak signs the NDA ✅ |
 | (received ~9–10 Oct) | New calendar invite: **Tue 13 Oct, 21:30–22:00 IST**. The interview appears to have moved |
 | **Mon 12 Oct** | **TODO: Confirm the Tuesday slot with Rathna/Dan** |
-| **Tue 13 Oct, 21:30** | **Round 2: Manish Gambhir, Sr. UX Director** (pending confirmation) |
+| **Tue 13 Oct, 21:30** | **Round 2: Manish Gambhir, Sr. UX Director** ✅ (~32 min). Generic questions: a design challenge (→ forecast work), team size, whether designers share work (→ each designer owns projects), office. Manish: Bengaluru UX works from office ~3 days/week; all current designers are contractors (~10 yrs exp), and they want permanent in-house hires. Very few in-house seats, so they want "the best of the best"; ~250 résumés, interviewing one by one, no timeline. Deepak showed the Insight case study at overview level plus a live AI-workflow demo (Confirm password added, then undone). Deepak's read: neutral, 50-50. No email address for Manish |
+| Wed 14 Oct | TODO: thank-you to Dan, cc Rathna, asking them to forward thanks + the Figma link to Manish |
 
 ---
 

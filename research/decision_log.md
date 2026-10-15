@@ -795,3 +795,116 @@ Log each entry **when the decision is made**, then review it at every end-of-cha
 - Screen-reader names specified on the board: Back, Menu, Create organization (+), Close / Dismiss (✕), dots "Slide N of 4", Show password.
 - Compliance: changed screens 0. The board, like check 1's and the decision frames, uses raw colours (doc boards were never token-bound).
 - Deepak's reasoning: *(pending)*
+
+### D081: Interview-day gap fill: loading, no network, returning home, handoff, validation (13 Oct)
+- Raised by Deepak (13 Oct, 13:00): we missed developer handoff + annotations, a loading state, and first-time vs returning home. Claude owned it: "dev handoff notes" was on the chat 17 gap list and dropped off.
+- Decided, on plan 90:6: Loading card 243:6 (spinner in the button on 07 + Log in for actions; skeleton on 09 Home for content; nothing under 1 s; still blocks when Reduce motion is on). No network card 93:88 upgraded to hi-fi + Retry. 09b "Home, coming back" card 243:14. New band "Handoff + testing": Developer handoff 243:50, Validation plan 243:58.
+- 09b: Claude changed it from "returning, 0 orgs" (looks the same as 09) to "returning, Lakshmi Pharmacy created, 0 devices → Add device". Deepak: "looks great" (implicit OK).
+- Handoff: Deepak picked the CVS Health Web Accessibility Annotation Kit (Figma Community v2.8.0) over Figma's native annotations, per a UI Collective video (Gemini brief 010). Claude's pushback, accepted: it's a web kit, so the notes use VoiceOver/TalkBack terms; annotate 5 key screens (04, 06, 07a, 08, 10), not all 21; one new component page "↳ Annotations" + one page "08 · Handoff".
+- Plan cards now carry "Open screen / wireframe / a11y check →" URL links (29) for presenting live (Deepak's idea). Main-path cards are 346 tall.
+- Owner: Deepak ← Claude. Deepak's reasoning: *(pending)*
+
+### D082: 03 Account: Log in is primary, Create account secondary (13 Oct)
+- Deepak: the original app makes Log in primary; Create account is used once, so it shouldn't be the main button on every logged-out visit. Add a short line about how quick sign-up is.
+- Claude agreed, and added a stronger reason: the screen's own promise "One NETGEAR account for all your products" means Nighthawk/Orbi/Meural users already have an account. Condition: Create account stays a full-width outline button (the persona is a first-time admin). Line = "New to NETGEAR? It takes 4 short steps." (true: Email, Name, Password, Country; no unmeasured "2 minutes").
+- Built: 164:81 Log in → Primary, first; group "New to NETGEAR" 247:298 (hint 247:294 + Create account 164:79 Secondary, gap 8); footer gap 24; stack bottom 760 (safe zone 768). Decision card 247:295 "CHANGED · LOG IN FIRST". Plan card 90:29 updated. Prototype links unchanged.
+- Owner: Deepak. Deepak's reasoning: "Users will most likely use Create account only once… every time they see Create account as a primary button, it doesn't make sense."
+- D082 revised (same day, Deepak): the hint line + outline button looked unconvincing, too highlighted, and the left-aligned hint clashed with the centred button label. Now: Log in (Primary) + Create account as a **Text** button (teal, no border, full-width 48 px, centred under Log in). The hint and its group are hidden as OLD (247:294, 247:298). Prototype Create account → 04 checked. Claude dropped its "outline button" condition.
+
+### D083: Loading state built (13 Oct, 14:00)
+- Actions/Button: new variant **Type=Primary, State=Loading** 250:292 (set now 1854 wide). The spinner 250:294 is a 270° ring and turns once per second (keyframes on the master, so every instance gets them). The Label prop stays bound. Primary only, because loading only happens on submit buttons. Also fixed: the Focus variants 173:14/16/18 had lost their Label binding.
+- Screens on 06 · Screens, row 1: **07L** 250:613 (x 9870) + 07L UAE copy 250:663 (x 10340): "Creating account…", terms ticked. **11L** 250:712 (x 10810): "Logging in…". **09L** skeleton 250:762 (x 11280): the app bar and "Email verified" stay real, plus grey blocks for the heading, 2 lines and the button. No shimmer (motion rule).
+- Prototype: 07 / 07 UAE Create account → 07L (instant) → after 1.5 s → 08 (dissolve 0.15). 11 Log in → 11L → 1.5 s → 09 (re-point to 09b once it's built). 08a Verify email → 09L → 1.2 s → 09. Loading screens have no other taps.
+- Decision frames 250:968 / 250:987 / 250:997. Evidence: NN/g response-time limits (1 s / 10 s). Plan card 243:6 has an "Open screen →" link. Compliance 0 on the 4 screens.
+- Owner: Deepak ← Claude. Deepak's reasoning: *(pending)*
+
+### D084: Side menu: Play intro + Log out wired (13 Oct)
+- Deepak: Play intro should open the intro; Log out should actually log out. He asked where Log out should land.
+- Play intro 198:203 → Intro slide 1 150:166. A prototype-only variable "Intro replay" (collection "Prototype", 253:360) is set to true. Skip intro (×3) and Get started check it: if true → back to 09 Home; otherwise → 03 Account (first run unchanged). Log out and "Start from the beginning" reset it.
+- Log out 198:223 → **03 Account** (was 11 Log in). Claude's reason: 03 is what every logged-out user sees, and since D082 it already has Log in first. On a shared shop phone, the next person may need Create account instead. No "Are you sure?" dialog: logging out is easy to undo, so a dialog only adds a tap.
+- Menu rows got an invisible, token-bound fill so the whole 48 px row is tappable (they had no fill before).
+- Owner: Deepak ← Claude (Deepak OK'd Log out → 03 on 13 Oct, chat 33). Deepak's reasoning: *(pending)*
+
+### D085: Change email returns to 08 (13 Oct)
+- Deepak found it: 08 "Change it" → 04, then Continue went through Name, Password and Country again (a loop). The user only wanted to fix the email.
+- Fix: prototype variable "Changing email". 08 Change it 177:348 sets it to true. 04 Continue 169:103: if true → back to 08 (and the flag resets), otherwise → 05 as before. 04 Back, Log out and "Start from the beginning" reset it.
+- Real app: the old link stops working and a new one goes to the new address (D044). Not drawn: 04 in "change mode" (heading "Change your email", button "Send new link"). Mention it live if asked.
+- Owner: Deepak. Deepak's reasoning: "once they change the email, they should automatically come back to the last screen."
+- D085 follow-up (Deepak: after changing the email, the user needs to know it worked): **08b** 255:357 (x 11750) = 08 + Feedback/Notice Success "Email updated · The link we sent before no longer works." (same pattern as 09 "Email verified"). 04 Continue (change mode) → 08b. Decisions 255:416. Plan card 93:42 updated. Claude: notice only, not a new layout. The prototype can't show a typed new address, so the email line looks unchanged. **09b now goes at x 12220.**
+- 08b copy revised (Deepak: the old body was unclear, and the main text must change too). Description: "We sent a new link to your updated email:" + the address (bold). Notice body: "You can ignore the first email." (was "The link we sent before no longer works."). Decision card COPY updated.
+- 08b copy, round 2 (Deepak: they typed a wrong address, so they never got the first email; "ignore the first email" makes no sense). The notice body is hidden, so the notice reads just "Email updated" (content centred). The main text carries the message.
+
+### D086: Resend → 08c "Sent again" (13 Oct)
+- Deepak: Resend did nothing; add logic or leave it out? Claude: add it. It was already on plan card 93:42, and a dead button is what an interviewer clicks.
+- 08c 260:370 (x 12690) = Success notice "Email sent again" + text "We sent the link again to <email>" + Resend set to Disabled, label "Resend in 60 s" (the wait is shown, not hidden). Resend on 08 (177:343) and 08b (255:386) → 08c (dissolve 0.15). Decisions 260:435. No live countdown (a static label in the prototype).
+- Owner: Deepak ← Claude. Deepak's reasoning: *(pending)*
+- D086 follow-up (Deepak): 08c notice now reads "Confirmation email sent again". Deepak asked whether Resend needs a loading screen. Claude: no, because the D083 rule shows loading only past 1 s, and the abrupt feel came from the notice. **Notice entrance motion** added on 09 (191:357), 08b (255:403) and 08c (260:386): fade in + slide down 8 px, 0.1→0.35 s, ease-out, plays once (09 timeline set to 60 s so it doesn't loop). Reduce motion: appears in place. Owner: Deepak ← Claude.
+- Notice fixes (Deepak: the notice showed first, then animated; ✕ did nothing). (1) 08b/08c keyframes now start at 0 s (0→0.25 s), and the links into them are instant (Resend on 08/08b, 04 Continue in change mode), so the resting state never flashes during a dissolve. (2) 09 notice motion removed, because 09 is revisited often (menu, overlay) and it would replay. (3) ✕ works: visibility bound to the prototype variables "Show verified notice" (09) and "Show sent notice" (08b/08c); ✕ sets false. Verify email / Resend / Change email set it true again; Start from the beginning + Log out reset both.
+
+### D087: 09b Home, coming back + login skeleton (13 Oct)
+- Deepak: after Log in, show a Home skeleton, not only the button spinner. Claude: both. The button covers the password check (a wrong password must stay on Log in, 11e); the skeleton covers loading the organizations. Deepak agreed to build it with 09b.
+- **09b** 263:385 (x 13160): app bar · Search organizations (shown now that there is 1 org, D072) · org row "Lakshmi Pharmacy · 1 location · 0 devices" + chevron (bordered, 16 padding) · "Add your first device" + "Jayanagar has no devices yet. Add an access point or a switch to see its status here." · Primary "Add device" → new overlay **263:495** (x 14100, "In the real app, this adds a device by scanning its QR code or typing its serial number."). No notice, no step list. Decisions 263:515.
+- **09bL** skeleton 263:447 (x 13630): the same shapes in Surface/subtle; the search field is real. Decisions 263:525.
+- Wiring: 11 Log in → 11L "Logging in…" (now 1.0 s) → 09bL (1.2 s) → 09b. 11e Log in → 11L too (was → 09). Plan card 243:14 has an "Open screen →" link. Compliance 0.
+- Known: ☰ on 09b opens 10 Side menu, which closes back to 09 (first-run), not 09b. Unverified claim: Insight adds devices by QR/serial (check the manual before quoting it).
+- Owner: Deepak ← Claude. Deepak's reasoning: *(pending)*
+- D083 follow-up (chat 33): Deepak OK'd that the loading screens always show in the demo.
+
+### D088: No network, hi-fi (13 Oct)
+- From plan card 93:88 + wireframe 97:967. **07n** 274:411 (x 14570) = 07 with terms ticked + Feedback/Notice Error "No connection · Your details are kept. Check Wi-Fi or mobile data." (role=alert) above the heading. The main button reads "Try again" (the wireframe's word; the plan chip said "Retry", now "Try again"). Decisions 274:478. Compliance 0.
+- Errors flow: 04e → 05e → 06e → **07n** → Try again → 11e (it was 06e → 11e). This is a tour of the error states, not one real path.
+- Plan card 93:88: "Open screen →" link now points to 274:411.
+- **Rev 2 (Deepak):** the inline notice got lost and the screen looked normal; "tone down the rest until the user closes the alert; don't leave the user stranded". Now 07n = 07 dimmed (Overlay/scrim token; Claude chose dim over blur because it's the platform standard and was already used on the side menu) + alert dialog 277:469: Error icon · "No connection" · "We couldn't create your account. Your details are saved. Turn on Wi-Fi or mobile data, then try again." · Primary Try again (→ 11e, tour) · Secondary Close → **07n2** 277:435 (x 15040, form with details kept; Create account → 07n again). role=alertdialog; tapping the scrim doesn't close it. Compliance 0.
+- Owner: Deepak. Deepak's reasoning: "the main goal is something went wrong; the user needs to know. If everything looks normal, it doesn't make sense."
+
+### D089: Developer handoff with the CVS Health annotation kit (13 Oct)
+- Deepak chose the method from the UI Collective video (Gemini 010) over Figma's built-in annotations: those show only layout values, nothing about screen readers.
+- Kit parts on "↳ Annotations" 278:4 in 6 Sections; landmarks skipped (web-only); the kit's VRT test frames hidden as OLD. The kit's Arial text switched to Inter (Arial can't be loaded by the build tool).
+- New page **08 · Handoff** 284:4. Pattern board **284:5 "Handoff · 04 Email"**: 3 copies of the screen = Reading order (1–7) · Focus order (1–4) · Elements (Button ×2, Link, Input, Heading h1, decorative progress bar) + 6 details cards with iOS/Android terms (Button/Link/.header traits, .emailAddress keyboard, isAccessibilityElement) + Reading/Focus order notes + "Ready for dev" tag + "Open screen →". Kit is web-first, so the cards translate it to native terms.
+- Rev 2 (Deepak): cards must sit close to their element and be connected, "easy for the viewer, for me to explain, and for the developer". Rebuilt as board 286:315: pin stamps + dashed connector lines to cards on both sides of the screen, each card level with its element; reading/focus order copies moved to row 2 with their notes beside them.
+- Owner: Deepak ← Claude (layout: Deepak). Deepak's reasoning: annotations far from the frame are hard to connect.
+- **Scope (Deepak ← Claude, 13 Oct):** annotate 2 representative screens only (04 form, 07a modal sheet); the rest follow the pattern, done with devs per sprint. **07a board = 290:346** (x 2040): h1 "Country" (focus lands here on open) · Close (focus back to 07's Country field; Android Back/iOS swipe down) · Search (results count announced, live region polite, Search key) · India = radio, "India, selected", 48 px rows · h2 section labels · reading 1–17 · focus 1–14, trapped in the sheet.
+
+### D090: What to finish before the interview (13 Oct, decided)
+- Deepak asked to update the cover, Define, Flow and wireframes, and to mark screens "Ready for dev" as in the video.
+- Claude: wireframes stay as they are (a dated snapshot; the hi-fi decision cards record what changed, and that iteration is the story). Define: check only, don't rebuild. Cover + Flow 60:5: update. "Ready for dev": use Figma's own Dev Mode status on the 2 handoff boards (it's a real dev signal, not just a tag). Still owed: Validation plan.
+- Owner: Deepak ← Claude. Deepak changed "Ready for dev" to the clean screens 04 + 07a (annotated boards are not clean screens). Deepak's reasoning: *(pending)*
+
+### D091: Validation plan, own page (13 Oct)
+- Deepak: give it a separate page, and think it through as a senior designer. New page **09 · Validation** 299:6 (after 08 · Dev Handoff), 3 boards at y 800:
+  - **299:7 "What could be wrong"** (x 0, motif): 5 assumptions to test, each tied to a task (sign up alone · find Create account when Log in is primary (tests our own D082) · come back from the mail app · empty Home → Create organization · the persona itself, which was never interviewed). Method: 5 small-business owners, new to Insight, no IT staff, iPhone + Android, 1 large-text user; remote 30 min, think aloud, Figma prototype on their phone; why 5 = NN/g link; recruited through resellers + a screener.
+  - **299:59 "Tasks"** (x 2040): 4 scenario tasks with no button names (Set up 01→09 · Country 07→07a · Come back 03→11→09b · Recover 11→11e), each with "Passes if" + "Watch for". Ease score 1–7 after each task + one closing question.
+  - **299:105 "Measure and decide"** (x 4080): test bars (4 of 5 finish alone; ease above 5.5/7; time to Home = baseline; 0 dead ends) + decision rule (2 of 5 stuck on a step → redesign + retest; 1 of 5 → watch) + after-launch funnel events (signup_start → account_created → email_verified → org_created → first_device_online), 10% rollout vs today, support calls + App Store reviews. Footer: "Not run yet."
+- Plan card 243:58 now says 4 tasks (was 3).
+- Owner: Deepak ← Claude. Deepak's reasoning: *(pending)*
+
+### D092: Audit + research accuracy pass (13 Oct, 15:30)
+- Deepak: every research word must be true; "10 minutes" is false (it didn't take him 10 min). Source of the claim: status-bar times 1:27 → 1:37 on the screenshots = the length of the screenshot session, not the sign-up time. Replaced: Research overview 51:66 "19 screens, then an empty home" (subline drops the duplicate "19 screens"); Cover problem card "19 screens"; Define metric "Time to reach home" today = "Not measured" (Validation board says round 1 sets it).
+- Verified against saved evidence: 4 App Store quotes (appstore_reviews.md, author + date), 190 reviews / 5 stores / 11 Oct, v10 (What's new screen).
+- Removed as inaccurate: "Across the flow" point 03 "Main buttons are navy, not Insight's teal" (the portal's primary IS navy, D061), hidden as OLD 51:61.
+- Deepak: Intro card 19:4 point 01 → "Clear headings, and the animations look good. But they stay abstract: no real devices or business names" (our slides use Lakshmi Pharmacy, WAX610, GC110P). Account card 28:4 rewritten humbler ("could stand out more", "Idea:").
+- Scan result card 22:4 → OLD, hidden (we never designed it); cards to its right moved left 2040 to close the gap. Layers "Obs ·" renamed "Observation ·".
+- Audit: reviewer guide 6:37 → OLD hidden (Deepak: not needed); plan cards 243:50/243:58 got "Open board →"; 243:54 stale text fixed; Flow 60:5 refresh skipped (Claude: states, not steps; plan 90:6 lists them).
+- Owner: Deepak (accuracy, tone, scan) ← Claude (sources, the navy line). Deepak's reasoning: "we should be careful when claiming something which is not true."
+
+### D093: Headline, About NETGEAR check, cover AI card, page order (13 Oct, 15:50)
+- Deepak: "19 screens" isn't the problem (ours has more). Research overview 51:66 → "3 interruptions, then an empty home"; sub: "Notifications, 2-step and What's new come before any setup · 3 visual styles · no next step". Cover problem card → "3 interruptions / before any setup, then a blank home with no next step".
+- Research cards: all 18 "Better:" → "Idea:" (Deepak: suggestions sounded too sure). 2-step + Forgot password cards KEPT (Deepak: shows how I observe design).
+- About NETGEAR 224:6 re-verified on the web, 13 Oct: tagline + "NETGEAR means business" (netgear.com, /business), 1996 + 30-year page, NASDAQ NTGR, MyNETGEAR / Community / Academy, Armor (annual, Bitdefender, app), Engage Controller (free desktop app), Insight Pro for MSPs. One fix: NETGEAR AV "stadiums, studios and halls" was not on NETGEAR's site → "for broadcast and live events".
+- Cover: subtitle "Sign-up to the first home screen, redesigned from research to dev handoff, with AI as my team"; new teal card 310:6 "HOW I WORKED · AI AS MY TEAM: I directed and made the calls: 93 logged decisions. Claude built in Figma, Gemini researched." (Deepak: highlight AI, it's a core JD requirement; the JD names Claude.) Claude had suggested dropping AI from the cover; Deepak overruled.
+- Pages: 08 · Validation, 09 · Dev Handoff (Deepak: handoff is the last step). Eyebrows: Validation STEP 9, Handoff STEP 10 (clash with a11y STEP 8 fixed).
+- Owner: Deepak. Deepak's reasoning: AI-assisted work is a core JD requirement; handoff is the last step.
+
+### D094: Metrics board evidence links (13 Oct, chat 38)
+- Status: decided (links) · proposed (label + count)
+- Owner: Deepak ← Claude. Deepak asked for clickable "Today" numbers to show Manish the evidence live.
+- Choice: TODAY labels on 53:45 tiles now read "TODAY · SCREENS 10 · 16" etc., numbers teal + underlined, node links to research cards 34:4, 46:4, 17:4, 39:4, 44:4, 31:4, 48:4. Time tile unchanged.
+- Proposed (waiting): "Interruptions before value" → "Pop-ups before setup" (Deepak read email verification as an interruption; it is counted in Trips). Fields 8 → 7 (typed inputs only; country is picked in both flows).
+- Deepak's reasoning: *(pending)*
+
+### D095: No video or decision-ID references on the canvas (13 Oct, chat 38)
+- Status: decided · Owner: Deepak
+- Choice: removed every visible "video / f_0xx" source tag and every "D0xx" decision number from Figma text (they read as internal jargon to a reviewer). Edge-case tags 08/10/11–12 now link to research cards. Decision log keeps the IDs.
+- Deepak's reasoning: "it feels alien to me" (D-numbers); video tags removed at his request.
+
+- 2026-10-13 (live demo): Confirm password field added to 06 · Password (174:179), node 330:446 under Password, Show toggle on. Reverses D064/card 09 "no Confirm password". Context: done live in Round 2 for Manish, as a demo of the AI workflow (Claude pushed back with evidence, Deepak overruled, Claude built it). Not a research-driven design decision. Reverted the same session (Deepak: "undo it"). 06 is back to one Password field; D064 stands.
